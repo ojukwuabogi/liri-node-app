@@ -3,17 +3,15 @@ require("dotenv").config();
 // Grab keys from keys.js
 var keys = require("./keys");
 
-// Twitter and Spotify API LOAD 
-var Twitter = require('twitter');
+// Spotify API LOAD 
+
 var Spotify = require('node-spotify-api');
 
 // File System Client 
 var fs = require('fs');
 
-// OMBA DATA //
+// OMBA DATA //iit
 var request = require('request');
-
-var twitClient = new Twitter(keys.twitter);
 var spotClient = new Spotify(keys.spotify); //changed var from spotify
 
 // PROCESS ARGUMENT #2 //
@@ -21,16 +19,6 @@ var command = process.argv[2];
 
 // PASS INFO on SPOTIFY or MOVIE API to ARRAY //
 var pass = process.argv[3];
-
-// Recent Tweets
-function twitGet(){
-	twitClient.get('statuses/user_timeline',function(error, tweets, response){
-		if(error) throw error;
-			for (var i = 0; i < tweets.length; i++){
-				console.log(tweets[i].created_at + ": " + tweets[i].user.screen_name + " says: " + tweets[i].text);			
-		}
-	})
-};
 
 // Spotify Request
 function spotGet(){
@@ -73,6 +61,7 @@ function moviGet(){
 	})
 }
 
+
 // Spotify text
 function spotIt(){
 	fs.readFile("random.txt", "utf8", function(error, data){
@@ -82,28 +71,27 @@ function spotIt(){
 	command = dataArr[0];
 	pass = dataArr[1];
 	switch(command){
-		case "my tweets":
-		twitGet();
-		break;
+	
 		case "spotify-this-song":
 		spotGet();
 		break;
 		case "movie_this":
 		moviGet();
-		break;
+        break;
+        
 		}
 	})
 }
 
 // Switch Commands
 	switch(command){
-		case "my-tweets":
-		twitGet();
-		break;
+		
 		case "spotify-this-song":
 		if(pass == undefined){
-			   pass = 'The Sign';
-		}
+               
+               pass =' Whats My Age Again by Blink-182';
+              
+            }
 		spotGet();
 		break;
 		case "movie-this":
@@ -115,4 +103,6 @@ function spotIt(){
 		case "do-what-it-says":
 		spotIt();
 		break;
-	}
+    }
+    
+   
